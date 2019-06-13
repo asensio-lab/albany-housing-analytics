@@ -1,7 +1,8 @@
 import pandas as pd 
 import numpy as np
 import json
-PATH_TO_CSV = "~/Dropbox/CDS-2019-AlbanyHub/Processed-Data/Totals2012.csv"
+#PATH_TO_CSV = "~/Dropbox/CDS-2019-AlbanyHub/Processed-Data/Totals2012.csv"
+PATH_TO_CSV = "~/Dropbox (Amherst College)/CDS-2019-AlbanyHub/Processed-Data/Totals2012.csv"
 df = pd.read_csv(PATH_TO_CSV, sep=',')
 
 addresses = df.loc[:,'Premise Address'].copy()
