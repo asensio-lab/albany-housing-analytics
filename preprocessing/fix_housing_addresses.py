@@ -4,8 +4,10 @@ import matplotlib.pyplot as plt
 import json
 import string
 import re
-PATH_TO_CDBG = "~/Dropbox/CDS-2019-AlbanyHub/Processed-Data/CDBG_Funded_Projects.csv"
-PATH_TO_HOME= "~/Dropbox/CDS-2019-AlbanyHub/Processed-Data/HOME_Funded_Projects.csv"
+#PATH_TO_CDBG = "~/Dropbox/CDS-2019-AlbanyHub/Processed-Data/CDBG_Funded_Projects.csv"
+#PATH_TO_HOME= "~/Dropbox/CDS-2019-AlbanyHub/Processed-Data/HOME_Funded_Projects.csv"
+PATH_TO_CDBG = "~/Dropbox (Amherst College)/CDS-2019-AlbanyHub/Processed-Data/CDBG_Funded_Projects.csv"
+PATH_TO_HOME = "~/Dropbox (Amherst College)/CDS-2019-AlbanyHub/Processed-Data/HOME_Funded_Projects.csv"
 #create this file by running build_addr_dict.py
 #addr_dict maps the street name to the postfix (i.e. st, dr, etc)
 f = open('addr_dict.json', 'r')
