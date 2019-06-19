@@ -1,0 +1,13 @@
+ALTER DATABASE AlbanyHub
+ADD FILEGROUP test1
+GO
+ALTER DATABASE AlbanyHub
+ADD FILE(
+    NAME = data1to10000,
+    FILENAME="~/Documents/cds/sql/addr1_10000_db.csv",
+    SIZE=1MB,
+    MAXSIZE=1MB,
+    FILEGROWTH=0MB
+)
+TO FILEGROUP test1
+GO
