@@ -1,7 +1,7 @@
 import pyodbc as p 
 import csv
 #see installation instructions for pyodbc
-FILE = '/home/mirabel/Documents/cds/sql/addr1_10000_db.csv'
+FILE = '/Users/william/Dropbox (Amherst College)/CDS-2019-AlbanyHub/ToDatabase/TotalHouse_v02.csv'
 server='albanyhub-cds-2019.database.windows.net'
 database = 'AlbanyHub'
 username = 'test'
@@ -15,16 +15,23 @@ while row:
     print(row[0])
     row = cursor.fetchone()
 #### Drop if exists
-cursor.execute('''IF OBJECT_ID('dbo.addresses') IS NOT NULL
-DROP TABLE dbo.addresses''')
+cursor.execute('''IF OBJECT_ID('dbo.housing') IS NOT NULL
+DROP TABLE dbo.housing''')
 #### Create
-cursor.execute('''CREATE TABLE dbo.addresses(
-    Id INT NOT NULL PRIMARY KEY, -- primary key column
-    Address [NVARCHAR](255) NOT NULL,
-    Xcoord FLOAT NOT NULL,
-    Ycoord FLOAT NOT NULL,
-    Tract [NVARCHAR](8) NOT NULL,
-    BlockGroup [NVARCHAR](8) NOT NULL
+cursor.execute('''CREATE TABLE dbo.housing(
+    Id INT PRIMARY KEY, -- primary key column
+    ParcelId [NVARCHAR](255),
+    PlanYear INT NOT NULL,
+    IDISProject INT NOT NULL,
+    Project [NVARCHAR](255) NOT NULL,
+    IDISActivityId INT NOT NULL,
+    ActivityStatus [NVARCHAR](255),
+    Program [NVARCHAR](255),
+    FundedAmount FLOAT NOT NULL,
+    DrawAmount FLOAT NOT NULL,
+    Balance FLOAT NOT NULL,
+    MultihomeType [NVARCHAR](8),
+    Multihome [NVARCHAR](8)
 );
 ''')
 count = 0
