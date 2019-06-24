@@ -1,0 +1,11 @@
+prereqs: 
+totalutilities.csv - utilities combined and addresses kept the same
+csvs from geocoding in dropbox
+
+1. run create_junction_table.py to create the junction table from the geocoded csvs
+
+2. run Untitled-1.py (temporary name) to match up the utilities with the junction table. mismatched addresses are coded as NOT FOUND
+
+
+To do - rename Untitled-1.py and sync with dropbox
+add procedure for housing 
