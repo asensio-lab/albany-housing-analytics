@@ -34,6 +34,6 @@ for i in range(0, len(s_utilities)):
     counter += 1
 #output to file
 df_utilities['PrimaryID'] = pd.Series(primaryid_list1)
-df_utilities.to_csv(PATH_TO_UTILITIES)
+df_utilities.to_csv(PATH_TO_UTILITIES, index_label="ChargeID")
 df2 = pd.DataFrame(data={'addr':list(notfound_dict.values()), 'loc':list(notfound_dict.keys())})
-df2.to_csv(OUT_PATH+"utilities_notfound.csv")
+df2.to_csv(OUT_PATH+"utilities_notfound.csv", index=False)

@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 import re
 import os
 from fix_addresses_master import *
-
+directory = "~~/Dropbox/CDS-2019-AlbanyHub/Raw-Data/PR 03 - CDBG_CDBG-R Activity Summary Report"
 project_typo_fixer = {'ACQUISITIONS':'ACQUISITION', 
             'GENERAL ADMINISTRATION':'ADMINISTRATION',
             'CDBG ADMINISTRATION':'ADMINISTRATION',
@@ -114,7 +114,6 @@ def parse(data):
             raise Exception(key+" does not have the same length as the other entries")
     return pd.DataFrame(data_dict)
 
-directory = "./PR 03 - CDBG_CDBG-R Activity Summary Report"
 df_list = []
 for filename in os.listdir(directory):
     if filename.endswith(".csv"): 
