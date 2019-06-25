@@ -1,6 +1,8 @@
 import pandas as pd 
 import numpy as np
 import json
+#obselete: builds a dict mapping street addresses to their suffix (st, dr, etc)
+#and exports to json
 #PATH_TO_CSV = "~/Dropbox/CDS-2019-AlbanyHub/Processed-Data/Totals2012.csv"
 PATH_TO_CSV = "~/Dropbox (Amherst College)/CDS-2019-AlbanyHub/Processed-Data/Totals2012.csv"
 df = pd.read_csv(PATH_TO_CSV, sep=',')
@@ -20,6 +22,5 @@ for d in addresses:
         st_end = add2[-1]
         if " ".join(st_name) not in addr_dict.keys():
             addr_dict[" ".join(st_name)] = st_end
-addr_dict['HIGHLAND']='AVE'
 f = open("addr_dict.json", 'w')
 json.dump(addr_dict, f)
