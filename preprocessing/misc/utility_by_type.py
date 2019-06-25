@@ -1,6 +1,7 @@
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
+# Takes the utilities in processed-data and separates them into different files by type
 pathstring="~/Dropbox/CDS-2019-AlbanyHub/Processed-Data/Totals"
 df_array = []
 #separate the service types into different utility categories
