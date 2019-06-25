@@ -4,6 +4,7 @@ import matplotlib.pyplot as plt
 import json
 import string
 import re
+#obselete: fixes various issues with housing addresses
 #PATH_TO_CDBG = "~/Dropbox/CDS-2019-AlbanyHub/Processed-Data/CDBG_Funded_Projects.csv"
 #PATH_TO_HOME= "~/Dropbox/CDS-2019-AlbanyHub/Processed-Data/HOME_Funded_Projects.csv"
 PATH_TO_CDBG = "~/Dropbox (Amherst College)/CDS-2019-AlbanyHub/Processed-Data/CDBG_Funded_Projects.csv"

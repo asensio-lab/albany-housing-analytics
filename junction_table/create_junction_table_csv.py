@@ -1,11 +1,12 @@
 import pandas as pd
 from fix_addresses_master import *
 #Creates the junction table based on three files from the geocoding folder
-PATH = '~/Dropbox/CDS-2019-AlbanyHub/geocoding/'
+IN_PATH = '~/Dropbox/CDS-2019-AlbanyHub/geocoding/'
+OUT_PATH = '~/Dropbox/CDS-2019-AlbanyHub/ToDatabase/'
 #read in files
-df1 = pd.read_csv(PATH+"geo_joined_wtracts.csv")            #original addresses, with some errors
-df2 = pd.read_csv(PATH+"geo_joined_wtracts_resolved.csv")   #The fixed versions of those errors
-df3 = pd.read_csv(PATH+"mismatched_housing_resolved.csv")   #geocoded addresses from housing which were not in the originals
+df1 = pd.read_csv(IN_PATH+"geo_joined_wtracts.csv")            #original addresses, with some errors
+df2 = pd.read_csv(IN_PATH+"geo_joined_wtracts_resolved.csv")   #The fixed versions of those errors
+df3 = pd.read_csv(IN_PATH+"mismatched_housing_resolved.csv")   #geocoded addresses from housing which were not in the originals
 
 #merge columns from fixed addresses into original
 old_name_series = df2['Address'] #addresses which were geocoded incorrectly
@@ -34,4 +35,4 @@ junct['Address'] = fix_series(junct['Address'])
 junct = junct.drop_duplicates(subset ="Address", 
                      keep = 'last')
 junct.index= range(len(junct))
-junct.to_csv("addr_junct_table.csv")
+junct.to_csv(OUT_PATH+"addr_junct_table.csv")
