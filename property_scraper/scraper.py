@@ -2,12 +2,21 @@ import json
 import requests
 import pandas as pd
 import time
+#this file scrapes property data from attomdata.com's 'expanded profile' api, which gives a variety of information about the address
+#including square footage and tax assessor data
+#Exports the property data as a JSON file
+
+############################################################
+#Replace with source of addresses, your api key, and the start and end index within the source of addresses
+#likely best not to retrieve more than 1000 addresses at once due to possibility of failure
 df = pd.read_csv('~/Dropbox/CDS-2019-AlbanyHub/Processed-Data/all_addresses.csv')
-addresses = df[['line1', 'line2']]
-prop_info = []
 header = {"apikey":"8adf54d74bfe18c9c634183af053e5b8", "accept":"application/json"}
 i_start=2001
 i_end  = i_start+1000
+############################################################
+addresses = df[['line1', 'line2']]
+prop_info = []
+
 
 i=i_start
 while i<i_end:
@@ -21,6 +30,8 @@ while i<i_end:
         prop_info.append(response.json()['property'][0])
     #FAILURE
     else:
+        print("Unknown issue: Sleeping for 30s to see if error resolves on its own")
+        print("Failed at", str(i))
         print(response.text)
         time.sleep(30)
     if i % 100 ==0:
