@@ -4,6 +4,7 @@ TotalHouse.csv
 csvs from geocoding in dropbox
 
 1. run create_junction_table_csv.py to create the junction table from the geocoded csvs
+   run addr_split_block.py to fix the issue where geocoding records data at block level, where we need block group
 
 2. run map_addr_key_utilities.py to match up the utilities with the junction table. Addresses in the utilities dataset are brought into line with the junction table using functions imported from fix_addresses_master.py. Addresses which still cannot be matched are coded as NOT FOUND
 
