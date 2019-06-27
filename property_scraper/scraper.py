@@ -30,11 +30,13 @@ while i<i_end:
         prop_info.append(response.json()['property'][0])
     #FAILURE
     else:
+<<<<<<< HEAD
         no_data_count = no_data_count+1
         prop_info.append([])
         i = i+1
     if i % 100 ==0:
         print(i, "out of",i_end)
 print(no_data_count)
+
 f = open('json_dump_'+str(i_start)+"_"+str(i_end-1)+'.json', 'w')
 json.dump(prop_info, f)
