@@ -19,7 +19,7 @@ while row:
 cursor.execute('''IF OBJECT_ID('dbo.utilities') IS NOT NULL
 DROP TABLE dbo.utilities''')
 #### Create
-cursor.execute('''CREATE TABLE dbo.utilities(
+cursor.execute('''CREATE TABLE dbo.census_tract(
     Id INT NOT NULL PRIMARY KEY, -- primary key column
     Address [NVARCHAR](255) NOT NULL,
     Xcoord FLOAT NOT NULL,
