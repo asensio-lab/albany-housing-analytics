@@ -7,20 +7,22 @@ from fix_addresses_master import *
 #Specify paths below this line
 #########################################
 #PATH TO UTILITIES TABLE with addresses still included
-PATH_TO_UTILITIES = '~/Dropbox/CDS-2019-AlbanyHub/Raw-Data/ReformattedYears.csv'
+PATH_TO_UTILITIES = '~/Dropbox (Amherst College)/CDS-2019-AlbanyHub/Raw-Data/ReformattedYears/Total.csv'
 #PATH TO ADDRESS JUNCTION TABLE created in create_junction_table.py
-df_junction_table = pd.read_csv('~/Dropbox/CDS-2019-AlbanyHub/ToDatabase/addr_junct_table.csv')
+df_junction_table = pd.read_csv('~/Dropbox (Amherst College)/CDS-2019-AlbanyHub/ToDatabase/addr_junct_table.csv')
 #OUTPUT PATH
-OUT_PATH='~/Dropbox/CDS-2019-AlbanyHub/ToDatabase/'
+OUT_PATH='~/Dropbox (Amherst College)/CDS-2019-AlbanyHub/Raw-Data/ReformattedYears/'
 #########################################
 #make sure column names are correct
 df_utilities = pd.read_csv(PATH_TO_UTILITIES)
-df_junction_table.columns = ['PrimaryID', 'Address', 'Xcoord', 'Ycoord', 'Tract', 'BlockGroup']
+df_junction_table.columns = ['PrimaryID', 'Address', 'Xcoord', 'Ycoord', 'Tract', 'BlockGroup', 'Block']
 my_dict = df_junction_table.set_index('Address').to_dict()['PrimaryID']#maps address to key
 s_utilities = df_utilities['Premise Address']#list of addresses per charge
 primaryid_list1 = [None] * len(s_utilities)
 notfound_dict = {}
 counter = 0
+print(type(s_utilities))
+#s_utilities = fix_addr(s_utilities)
 s_utilities = fix_series(s_utilities)   #Fix typos using fix_addresses_master.py
 #For each address in utilities, pull address id from dictionary
 for i in range(0, len(s_utilities)):
