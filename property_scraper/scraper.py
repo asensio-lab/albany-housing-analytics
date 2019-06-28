@@ -9,12 +9,12 @@ import time
 ############################################################
 #Replace with source of addresses, your api key, and the start and end index within the source of addresses
 #likely best not to retrieve more than 1000 addresses at once due to possibility of failure
-df = pd.read_csv('~/Dropbox (Amherst College)/CDS-2019-AlbanyHub/ToDatabase/addr_junct_table.csv')
+df = pd.read_csv('~/Dropbox/CDS-2019-AlbanyHub/ToDatabase/addr_junct_table.csv')
 df['line1'] = df['Address']
 df['line2'] = "Albany, GA"
-header = {"apikey":"6d49f3812c63fe2db26f1ba2cae1eeda", "accept":"application/json"}
+header = {"apikey":"8adf54d74bfe18c9c634183af053e5b8", "accept":"application/json"}
 i_start=11001
-i_end  = i_start+1000
+i_end  = i_start+999
 ############################################################
 addresses = df[['line1', 'line2']]
 prop_info = []
