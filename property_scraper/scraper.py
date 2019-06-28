@@ -13,7 +13,7 @@ df = pd.read_csv('~/Dropbox (Amherst College)/CDS-2019-AlbanyHub/ToDatabase/addr
 df['line1'] = df['Address']
 df['line2'] = "Albany, GA"
 header = {"apikey":"6d49f3812c63fe2db26f1ba2cae1eeda", "accept":"application/json"}
-i_start=11001
+i_start=27001
 i_end  = i_start+1000
 ############################################################
 addresses = df[['line1', 'line2']]
