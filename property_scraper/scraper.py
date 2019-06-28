@@ -12,10 +12,9 @@ import time
 df = pd.read_csv('/Users/davidreynolds/Dropbox/CDS-2019-AlbanyHub/ToDatabase/addr_junct_table.csv')
 df['line1'] = df['Address']
 df['line2'] = "Albany, GA"
-header = {"apikey":"fd68ecdf6751c88e5a399f1a35915ab2", "accept":"application/json"}
-i_start=16000
-i_end  = 16000
-############################################################
+header = {"apikey":"6d49f3812c63fe2db26f1ba2cae1eeda", "accept":"application/json"}
+i_start=27001
+i_end  = i_start+1000
 addresses = df[['line1', 'line2']]
 prop_info = []
 
