@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 import re
 import os
 from fix_addresses_master import *
-directory = "~~/Dropbox/CDS-2019-AlbanyHub/Raw-Data/PR 03 - CDBG_CDBG-R Activity Summary Report"
+directory = "~/Dropbox (Amherst College)/CDS-2019-AlbanyHub/Raw-Data/PR 03 - CDBG_CDBG-R Activity Summary Report"
 project_typo_fixer = {'ACQUISITIONS':'ACQUISITION', 
             'GENERAL ADMINISTRATION':'ADMINISTRATION',
             'CDBG ADMINISTRATION':'ADMINISTRATION',
@@ -131,10 +131,10 @@ for filename in os.listdir(directory):
     else:
         continue
 df = pd.concat(df_list, axis=0)
-df.to_csv("cdbg_1994-2017.csv")
+df.to_csv("test_cdbg_1994-2017.csv")
 
-df2 = df[(df['Project']=='EMERGENCY REPAIRS') | (df['Project']=='ENERGY EFFICIENCY') | (df['Project']=='REHABILITATION')]
-unq = df2['Address'].unique()
-addr_dict = pd.read_csv('~/Dropbox/CDS-2019-AlbanyHub/ToDatabase/addr_db.csv')
+#df2 = df[(df['Project']=='EMERGENCY REPAIRS') | (df['Project']=='ENERGY EFFICIENCY') | (df['Project']=='REHABILITATION')]
+#unq = df2['Address'].unique()
+#addr_dict = pd.read_csv('~/Dropbox/CDS-2019-AlbanyHub/ToDatabase/addr_db.csv')
 
 
