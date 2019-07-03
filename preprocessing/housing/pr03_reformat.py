@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 import re
 import os
 from fix_addresses_master import *
-directory = "~~/Dropbox/CDS-2019-AlbanyHub/Raw-Data/PR 03 - CDBG_CDBG-R Activity Summary Report"
+directory = "/home/mirabel/Dropbox/CDS-2019-AlbanyHub/Raw-Data/PR 03 - CDBG_CDBG-R Activity Summary Report/"
 project_typo_fixer = {'ACQUISITIONS':'ACQUISITION', 
             'GENERAL ADMINISTRATION':'ADMINISTRATION',
             'CDBG ADMINISTRATION':'ADMINISTRATION',
@@ -99,6 +99,14 @@ def parse(data):
             funded_amts[i] = float(funded_amts[i][1])
         else:
             funded_amts[i] = float("".join(funded_amts[i][0].split(',')))# get rid of , in $x,xxx.xx
+    description_re = r'Description:,+\n(?:"?(.*?)"| ?([^,]+))'
+    #description_re = r'Description:,+\n([^,]+)'
+    descriptions = re.findall(description_re, data)
+    for i in range(len(descriptions)):
+        if len(descriptions[i][0]) == 0:
+            descriptions[i] = descriptions[i][1]
+        else:
+            descriptions[i] = descriptions[i][0]
     l = len(addrs)
     data_dict = {   "Address":addrs, 
                     "PlanYear":pgm_years, 
@@ -108,7 +116,8 @@ def parse(data):
                     "Status":status,
                     "StatusDate":status_date,
                     "InitialFundingDate":fund_dates,
-                    "FundedAmount":funded_amts}
+                    "FundedAmount":funded_amts,
+                    "Description":descriptions}
     for key,val in data_dict.items():
         if len(val)!=l:
             raise Exception(key+" does not have the same length as the other entries")
@@ -133,8 +142,5 @@ for filename in os.listdir(directory):
 df = pd.concat(df_list, axis=0)
 df.to_csv("cdbg_1994-2017.csv")
 
-df2 = df[(df['Project']=='EMERGENCY REPAIRS') | (df['Project']=='ENERGY EFFICIENCY') | (df['Project']=='REHABILITATION')]
-unq = df2['Address'].unique()
-addr_dict = pd.read_csv('~/Dropbox/CDS-2019-AlbanyHub/ToDatabase/addr_db.csv')
 
 
