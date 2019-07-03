@@ -54,7 +54,9 @@ addr_fix_entries = {
     '207 INGLESIDE DR':'207 N INGLESIDE DR',
     '2620 S MADISON':'2620 S MADISON ST',
     '208 S MADISON':'208 S MADISON ST',
-    '2420 DUNDEE':'2420 DUNDEE CT'
+    '2420 DUNDEE':'2420 DUNDEE CT',
+    '231 E OGLETHORPE AVE': '231 E OGLETHORPE BLVD',
+    '120 BLAYLOCK ST': '120 OLD BLAYLOCK LN'
 }
 def fix_addr(series):
     for key, val in addr_fix_typos.items():
