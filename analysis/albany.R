@@ -3,6 +3,7 @@ library(tidyverse)
 house <- read_csv("/Users/davidreynolds/Dropbox/CDS-2019-AlbanyHub/ToDatabase/TotalHouse_v03.csv")
 utilities <- read_csv("/Users/davidreynolds/Dropbox/CDS-2019-AlbanyHub/ToDatabase/TotalUtilities.csv")
 census <- read_csv("/Users/davidreynolds/Dropbox (GaTech)/CDS-2019-AlbanyHub/Tables/census.csv")
+junction <- read_csv("/Users/davidreynolds/Dropbox (GaTech)/CDS-2019-AlbanyHub/ToDatabase/addr_junct_table.csv")
 
 #Prepping the Data
 house$X1 <- NULL
@@ -88,9 +89,71 @@ primary_id <- as.character(primary_id)
 attach(census)
 tract <- as.factor(tract)
 block_group <- as.factor(block_group)
-county <- as.factor(county)
-block_tract <- as.factor(block_tract)
+block_group_tract <- as.factor(block_group_tract)
 total_pop <- as.numeric(total_pop)
 total_inc <- as.numeric(total_inc)
-inc_less_10k <- as.numeric(inc_less_10k)
+inc_less_25k <- as.numeric(inc_less_25k)
+inc_25k_49999 <- as.numeric(inc_25k_49999)
+inc_50k_99999 <- as.numeric(inc_50k_99999)
+inc_100k_more <- as.numeric(inc_100k_more)
+total_labor <- as.numeric(total_labor)
+total_in_laborforce <- as.numeric(total_in_laborforce)
+in_laborforce_pct <- as.numeric(in_laborforce_pct)
+total_notin_laborforce <-as.numeric(total_notin_laborforce)
+notin_laborforce_pct <- as.numeric(notin_laborforce_pct)
+total_civil_labor <- as.numeric(total_civil_labor)
+emp_civil_labor <- as.numeric(emp_civil_labor)
+emp_civil_labor_pct <- as.numeric(emp_civil_labor_pct)
+unemp_civil_labor <- as.numeric(unemp_civil_labor)
+unemp_civil_labor_pct <- as.numeric(unemp_civil_labor_pct)
+total_armedforces <- as.numeric(total_armedforces)
+total_vacdata <- as.numeric(total_vacdata)
+total_occ_homes <- as.numeric(total_occ_homes)
+occ_homes_pct <- as.numeric(occ_homes_pct)
+total_vac_homes <- as.numeric(total_vac_homes)
+vac_homes_pct <- as.numeric(vac_homes_pct)
+total_ordata <- as.numeric(total_ordata)
+total_owner <- as.numeric(total_owner)
+owner_pct <- as.numeric(owner_pct)
+total_renter <- as.numeric(total_renter)
+renter_pct <- as.numeric(renter_pct)
 
+View(house)
+View(utilities)
+View(census)
+
+#house
+attach(house)
+
+fit <- lm(funded_amount ~ plan_year + project + program)
+summary(fit)
+plot(fit)
+
+fit <- lm(funded_amount ~ plan_year)
+summary(fit)
+
+fit <- lm(funded_amount ~ project)
+summary(fit)
+
+fit <- lm(funded_amount ~ program)
+summary(fit)
+
+anova <- aov(funded_amount ~ plan_year + project + program)
+summary(anova)
+
+anova <- aov(funded_amount ~ plan_year)
+summary(anova)
+
+anova <- aov(funded_amount ~ project)
+summary(anova)
+
+anova <- aov(funded_amount ~ program)
+summary(anova)
+
+#utlities
+attach(utilities)
+fit <- lm(charge_amount ~ service_type + consumption + days_of_service + year)
+summary(fit)
+plot(fit)
+
+fit <- lm(funded_amount ~ plan_year + project + program + )
