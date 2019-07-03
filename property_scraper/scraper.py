@@ -30,7 +30,7 @@ while i<i_end:
     address2 = addresses.loc[i, 'line2']
     # print(i, address1)
     parameters = { 'address1':address1, 'address2':address2}
-    response = requests.get("https://api.gateway.attomdata.com/propertyapi/v1.0.0/property/basicprofile", headers=header, params=parameters)
+    response = requests.get("https://api.gateway.attomdata.com/propertyapi/v1.0.0/property/expandedprofile", headers=header, params=parameters)
     #SUCCESS
     if response.status_code==200:
         i=i+1

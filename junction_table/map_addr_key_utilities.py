@@ -7,11 +7,11 @@ from fix_addresses_master import *
 #Specify paths below this line
 #########################################
 #PATH TO UTILITIES TABLE with addresses still included
-PATH_TO_UTILITIES = '~/Dropbox (Amherst College)/CDS-2019-AlbanyHub/Raw-Data/ReformattedYears/Total.csv'
+PATH_TO_UTILITIES = '/home/mirabel/Dropbox (GaTech)/CDS-2019-AlbanyHub/ToDatabase/TotalUtilities.csv'
 #PATH TO ADDRESS JUNCTION TABLE created in create_junction_table.py
-df_junction_table = pd.read_csv('~/Dropbox (Amherst College)/CDS-2019-AlbanyHub/ToDatabase/addr_junct_table.csv')
+df_junction_table = pd.read_csv('~/Dropbox (GaTech)/CDS-2019-AlbanyHub/ToDatabase/addr_junct_table.csv')
 #OUTPUT PATH
-OUT_PATH='~/Dropbox (Amherst College)/CDS-2019-AlbanyHub/Raw-Data/ReformattedYears/'
+OUT_PATH='/home/mirabel/Dropbox (GaTech)/CDS-2019-AlbanyHub/ToDatabase/TotalUtilities_v2.csv'
 #########################################
 #make sure column names are correct
 df_utilities = pd.read_csv(PATH_TO_UTILITIES)
