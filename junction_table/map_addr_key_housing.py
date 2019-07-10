@@ -13,7 +13,7 @@ df_junction_table = pd.read_csv('~/Dropbox/CDS-2019-AlbanyHub/ToDatabase/addr_ju
 #OUTPUT PATH
 output_path = "~/Dropbox/CDS-2019-AlbanyHub/ToDatabase/"
 #########################################
-df_junction_table.columns = ['PrimaryID', 'Address', 'Xcoord', 'Ycoord', 'Tract', 'BlockGroup']
+df_junction_table.columns = ['PrimaryID', 'Address', 'Xcoord', 'Ycoord', 'Tract', 'BlockGroup', 'Block']
 my_dict = df_junction_table.set_index('Address').to_dict()['PrimaryID']#maps address to key
 s_housing_projects = df_housing_projects['Address']#list of addresses per charge
 
