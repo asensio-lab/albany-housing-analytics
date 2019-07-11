@@ -1,6 +1,12 @@
 #master file with function fix_series(s) which fixes all known typos
+#important note: the 'typo' may not necessarily be incorrect, but this makes sure that all spellings/ address suffixes
+#are consistent across different data sets. 
+#Dictionary: original addresses are keys, corrected addresses are values
+
 
 # safe to use with .replace
+#IE any instance of the values on the left are replaced with the value on the right
+#Even if this instance is a subset of a larger string
 addr_fix_typos = {
     'EASTTOWN':'E TOWN',
     'CORDELL AVE':'CORDELL LN',
@@ -69,6 +75,7 @@ addr_fix_typos = {
     
 }
 #NOT safe to use with replace
+#The left value is replaced with the right value ONLY IF the left value is exactly equal to the string
 addr_fix_entries = {
     'LAKEVIEW':'LAKEVIEW RD',
     'W BROAD':'W BROAD AVE',
@@ -152,13 +159,17 @@ addr_fix_entries = {
 '2511 CARDINAL DR': '2511 CARDINAL ST',
 }
 def fix_addr(series):
+	#replace typos using first dict
     for key, val in addr_fix_typos.items():
         series = series.replace(key, val)
+	#fix incorrect addresses using second dict
     for key, val in addr_fix_entries.items():
         if series == key:
             series = val
     return series
 
+#In other files: call fix_series with a pandas series of addresses as an argument
+#Returns the series with all known typos fixed
 def fix_series(series):
     series = series.apply(fix_addr)
     return series
