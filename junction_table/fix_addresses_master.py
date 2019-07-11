@@ -70,7 +70,8 @@ addr_fix_typos = {
     'W DOMINION CT' : 'DOMINION CT',
     'SCHILLING DR' : 'SCHILLING AVE',
     'ROBINHOOD RD' : 'ROBINHOOD DR',
-    'HANOVER DR' : 'HANOVER ST'
+    'HANOVER DR' : 'HANOVER ST',
+    'N CENTRAL ST' : 'N CENTRAL AVE'
     
 }
 #NOT safe to use with replace

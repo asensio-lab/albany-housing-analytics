@@ -4,7 +4,8 @@ import matplotlib.pyplot as plt
 import re
 import os
 from fix_addresses_master import *
-directory = "/home/mirabel/Dropbox/CDS-2019-AlbanyHub/Raw-Data/PR 03 - CDBG_CDBG-R Activity Summary Report/"
+#directory = "/home/mirabel/Dropbox/CDS-2019-AlbanyHub/Raw-Data/PR 03 - CDBG_CDBG-R Activity Summary Report/"
+directory = "/Users/william/Dropbox (Amherst College)/CDS-2019-AlbanyHub/Raw-Data/pr03_2007/"
 project_typo_fixer = {'ACQUISITIONS':'ACQUISITION', 
             'GENERAL ADMINISTRATION':'ADMINISTRATION',
             'CDBG ADMINISTRATION':'ADMINISTRATION',
@@ -140,7 +141,7 @@ for filename in os.listdir(directory):
     else:
         continue
 df = pd.concat(df_list, axis=0)
-df.to_csv("test_cdbg_1994-2017.csv")
+df.to_csv("test_cdbg_2007-2017.csv")
 
 
 

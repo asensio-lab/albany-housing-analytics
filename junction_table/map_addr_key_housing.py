@@ -7,18 +7,22 @@ from fix_addresses_master import *
 #Specify paths below this line
 #########################################
 #PATH to housing projects
-df_housing_projects = pd.read_csv('~/Dropbox/CDS-2019-AlbanyHub/ToDatabase/TotalHousingFixed6-19.csv')
+#df_housing_projects = pd.read_csv('~/Dropbox/CDS-2019-AlbanyHub/ToDatabase/TotalHousingFixed6-19.csv')
+path = '/Users/william/Dropbox (Amherst College)/CDS-2019-AlbanyHub/'
+df_housing_projects = pd.read_csv(path + 'ToDatabase/TotalHouse_v03.csv')
 #PATH to junction table
-df_junction_table = pd.read_csv('~/Dropbox/CDS-2019-AlbanyHub/ToDatabase/addr_junct_table.csv')
+#df_junction_table = pd.read_csv('~/Dropbox/CDS-2019-AlbanyHub/ToDatabase/addr_junct_table.csv')
+df_junction_table = pd.read_csv(path + 'ToDatabase/addr_junct_table.csv')
 #OUTPUT PATH
-output_path = "~/Dropbox/CDS-2019-AlbanyHub/ToDatabase/"
+#output_path = "~/Dropbox/CDS-2019-AlbanyHub/ToDatabase/"
+output_path = path + 'Raw-Data/test/'
 #########################################
 df_junction_table.columns = ['PrimaryID', 'Address', 'Xcoord', 'Ycoord', 'Tract', 'BlockGroup', 'Block']
 my_dict = df_junction_table.set_index('Address').to_dict()['PrimaryID']#maps each address to its id
 s_housing_projects = df_housing_projects['Address']#lists all addresses in housing projects
 
 #Drop unneccesary columns
-df_housing_projects.drop(['City', 'State', 'XY Coordinates'], inplace = True, axis = 1)
+#df_housing_projects.drop(['City', 'State', 'XY Coordinates'], inplace = True, axis = 1)
 
 #For each address in housing projects, pull address id from dictionary
 primaryid_list1 = [None] * len(s_housing_projects) #the id for each address
