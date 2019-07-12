@@ -79,10 +79,9 @@ for vals in missing_cols.itertuples():
     SOM.loc[vals.Index, 'MonthlyMaximumTemperature'] = days.loc[:,'DailyMaximumDryBulbTemperature'].apply(asciistrip).mean()
     SOM.loc[vals.Index, 'MonthlyMinimumTemperature'] = days.loc[:,'DailyMinimumDryBulbTemperature'].apply(asciistrip).mean()
     SOM.loc[vals.Index, 'MonthlyMeanTemperature'] = days.loc[:,'DailyAverageDryBulbTemperature'].apply(asciistrip).mean()
-    SOM.loc[vals.Index, 'AWND'] = days.loc[:,'DailyAverageWindSpeed'].apply(asciistrip).mean()
     SOM.loc[vals.Index, 'CLDD'] = days.loc[:,'DailyAverageDryBulbTemperature'].apply(asciistrip).agg(CDD_monthly).sum()
     SOM.loc[vals.Index, 'HTDD'] = days.loc[:,'DailyAverageDryBulbTemperature'].apply(asciistrip).agg(HDD_monthly).sum()
 SOM=SOM.sort_values(by=['YEAR', 'MONTH'])
 SOM.index = range(len(SOM))
-SOM = SOM[['YEAR', 'MONTH', 'DATE', 'MonthlyMaximumTemperature', 'MonthlyMinimumTemperature', 'MonthlyMeanTemperature', 'AWND', 'CLDD', 'HTDD']]
+SOM = SOM[['YEAR', 'MONTH', 'DATE', 'MonthlyMaximumTemperature', 'MonthlyMinimumTemperature', 'MonthlyMeanTemperature', 'CLDD', 'HTDD']]
 SOM.to_csv("LCD_month.csv", index=False)
