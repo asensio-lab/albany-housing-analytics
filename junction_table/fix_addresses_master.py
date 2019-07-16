@@ -1,6 +1,12 @@
 #master file with function fix_series(s) which fixes all known typos
+#important note: the 'typo' may not necessarily be incorrect, but this makes sure that all spellings/ address suffixes
+#are consistent across different data sets. 
+#Dictionary: original addresses are keys, corrected addresses are values
+
 
 # safe to use with .replace
+#IE any instance of the values on the left are replaced with the value on the right
+#Even if this instance is a subset of a larger string
 addr_fix_typos = {
     'EASTTOWN':'E TOWN',
     'CORDELL AVE':'CORDELL LN',
@@ -36,11 +42,40 @@ addr_fix_typos = {
     'E OGLETHORPE E BLVD':'E OGLETHORPE BLVD',
     'W WADDELL W AVE':'W WADDELL AVE',
     'N HALEY ST': 'HALEY ST',
-    'Swaggot Road':'SWAGGOTT RD'
-    
+    'Swaggot Road':'SWAGGOTT RD',
+    ' W AVE' : ' AVE',
+    ' W DR': ' DR',
+    ' N ST' : ' ST',
+    'WILLIAMS JR ST' : 'WILLIAMS ST',
+    'LINCOLN AVENUE ALY' : 'W LINCOLN AVE',
+    'MERCER AVENUE ALY' : 'MERCER AVE',
+    'E BROAD E AVE' : 'E BROAD AVE',
+    'S WASHINGTON S ST' : 'S WASHINGTON ST',
+    'S COLLINS ST': 'COLLINS ST',
+    'STATION CROSSING RD':  'STATION CROSSING DR',
+    'PINE BLUFF':'PINEBLUFF',
+    'GREENVALE RD' : 'GREENVALE AVE',
+    'COMMOMS': 'COMMONS',
+    'N SLAPPEY N BLVD' : 'N SLAPPEY BLVD',
+    'W ROOSEVELT AVENUE ALY':'W ROOSEVELT AVE',
+    'W SOCIETY ALY':'W SOCIETY AVE',
+    'GILLIOINVILLE' :  'GILLIONVILLE',
+    'N JEFFERSON N ST':  'N JEFFERSON ST',
+    'N WESTOVER N BLVD': 'N WESTOVER BLVD',
+    'FOREST GLENN' : 'FOREST GLEN',
+    'KINGSWOOD DR': 'KINGSWOOD CT',
+    'MAYFAIR LN' : 'MAYFAIR CT',
+    'ALABAMA DR' : 'ALABAMA AVE',
+    'N WASHINGTON N ST' :'N WASHINGTON ST',
+    'W DOMINION CT' : 'DOMINION CT',
+    'SCHILLING DR' : 'SCHILLING AVE',
+    'ROBINHOOD RD' : 'ROBINHOOD DR',
+    'HANOVER DR' : 'HANOVER ST',
+    'N CENTRAL ST' : 'N CENTRAL AVE'
     
 }
 #NOT safe to use with replace
+#The left value is replaced with the right value ONLY IF the left value is exactly equal to the string
 addr_fix_entries = {
     'LAKEVIEW':'LAKEVIEW RD',
     'W BROAD':'W BROAD AVE',
@@ -54,16 +89,87 @@ addr_fix_entries = {
     '207 INGLESIDE DR':'207 N INGLESIDE DR',
     '2620 S MADISON':'2620 S MADISON ST',
     '208 S MADISON':'208 S MADISON ST',
-    '2420 DUNDEE':'2420 DUNDEE CT'
+    '2420 DUNDEE':'2420 DUNDEE CT',
+    '231 E OGLETHORPE AVE': '231 E OGLETHORPE BLVD',
+    '120 BLAYLOCK ST': '120 OLD BLAYLOCK LN',
+'1432 S LIBERTY S EXPY': '1432 LIBERTY EXPY',
+'1432 S LIBERTY EXPY' : '1432 LIBERTY EXPY',
+'3210 MARTIN LUTHER KING DR': '3210 MARTIN LUTHER KING JR DR', 
+'3210 S MARTIN LUTHER KING' : '3210 MARTIN LUTHER KING JR DR',
+'109 SHELBY' : '109 SHELBY LN',
+'1902 SUNRIDGE DR' : '1902 SUNRIDGE CT',
+'1002 OAKRIDGE DR' : '1002 W OAKRIDGE DR',
+'902 OAKRIDGE DR' : '902 W OAKRIDGE DR', 
+'1303 OAKRIDGE DR' : '1303 W OAKRIDGE DR', 
+'2007 OAKRIDGE DR' : '2007 W OAKRIDGE DR',
+'304 OAKRIDGE DR' : '304 E OAKRIDGE DR',
+'OAKRIDGE' : 'OAKRIDGE DR',
+'2100 HABERSHAM' : '2100 HABERSHAM RD',
+'512 LIBERTY EXPRESSWAY' : '512 LIBERTY EXPY',
+'629 LOCKET STATION RD' : '629 LOCKETT STATION RD',
+'999 S MAPLE AVE' : '999 S MAPLE ST',
+'2415 N BRIERWOOD DR' : '2415 BRIERWOOD DR',
+'610 LINCOLN AVE': '610 W LINCOLN AVE', 
+'720 LINCOLN AVE' : '720 W LINCOLN AVE',
+'2430 ROSEBRIER RD.': '2430 ROSEBRIER RD',
+'2430 ROSEBRIER DR' : '2430 ROSEBRIER RD',
+'501 S JACKSON' : '501 S JACKSON ST',
+'1701 FULTON ROAD' : '1701 FULTON AVE',
+'403 DELLWOOD DR': '403 S DELLWOOD DR',
+'320 JACKSON' : '320 S JACKSON ST', 
+'320 S JACKSON' : '320 S JACKSON ST',
+'924 HIGHLAND AVE' : '924 W HIGHLAND AVE',
+'1019 COASTLINE DR' : '1019 COASTLINE AVE',
+'242 W BROAD' : '242 W BROAD AVE',
+'3527 SYLVESTER' : '3527 SYLVESTER RD',
+'512 ROOSEVELT AVE' :'512 W ROOSEVELT AVE',
+'722 RESIDENCE AVENUE':'722 W RESIDENCE AVE',
+'1153 BENJAMIN AVE':'1153 BENJAMIN ST',
+'1112 PEACHTREE': '1112 PEACHTREE TER',
+'405 W SOCIETY':'405 W SOCIETY AVE',
+'110 N WESTOVER': '110 N WESTOVER BLVD',
+'1616 WHISPERWOOD' : '1616 WHISPERWOOD ST',
+'1110 RAWSON':'1110 RAWSON DR',
+'1301 PINECREST': '1301 PINECREST DR',
+'108 DAWES' : '108 DAWES ST',
+'1943 S RIVERVIEW S DR' : '1943 S RIVERVIEW CIR',
+'2607 CARDINAL DR': '2607 CARDINAL ST',
+'2609 CARDINAL DR': '2609 CARDINAL ST',
+'2604 CARDINAL DR': '2604 CARDINAL ST',
+'704 WESTOVER BLVD': '704 N WESTOVER BLVD',
+'1200 WESTOVER BLVD': '1200 N WESTOVER BLVD',
+'2602 DAWSON HEIGHTS RD': '2602 DAWSON RD',
+'117 PRIMROSE': '117 PRIMROSE DR',
+'1400 BRICKLINE': '1400 BRICKLINE CT',
+'2724 LEDO': '2724 LEDO RD',
+'2709 DAWSON': '2709 DAWSON RD',
+'866 OAKLAND RD.': '866 OAKLAND RD',
+'2923 N SLAPPEY N BLVD': '2923 N SLAPPEY BLVD',
+'205 QUAIL CHASE': '205 QUAIL CHASE DR',
+'100 PATRIDGE DR': '100 PARTRIDGE DR',
+'539 N WESTOVER N BLVD': '539 N WESTOVER BLVD',
+'539 WESTOVER BLVD': '539 WESTOVER N BLVD',
+'2209 N SLAPPEY N BLVD':  '2209 N SLAPPEY BLVD',
+'3404 BELLINGHAM': '3404 BELLINGHAM LN',
+'2600 DAWSON HEIGHTS RD': '2600 DAWSON RD',
+'815 16TH': '815 16TH AVE',
+'1206 STUART': '1206 STUART AVE',
+'619 POINT NORTH BLVD': '619 POINTE NORTH BLVD',
+'2507 CARDINAL DR': '2507 CARDINAL ST',
+'2511 CARDINAL DR': '2511 CARDINAL ST',
 }
 def fix_addr(series):
+	#replace typos using first dict
     for key, val in addr_fix_typos.items():
         series = series.replace(key, val)
+	#fix incorrect addresses using second dict
     for key, val in addr_fix_entries.items():
         if series == key:
             series = val
     return series
 
+#In other files: call fix_series with a pandas series of addresses as an argument
+#Returns the series with all known typos fixed
 def fix_series(series):
     series = series.apply(fix_addr)
     return series

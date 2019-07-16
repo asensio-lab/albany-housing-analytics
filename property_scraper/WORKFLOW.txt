@@ -1,0 +1,12 @@
+To retrieve data from api service:
+1. RUN scraper.py, replacing the api key, setting the file the addresses are being read from to 'addr_junct_table.csv', and setting the api endpoint to 'extendedprofile'. Place the resulting .json files in Processed-Data/attom-json
+2. RUN property_data.ipynb, up to to the "Data Exploration" sub heading, generating:
+property_data.csv: certain chosen fields from the property data exported into a dataframe
+missing.csv: The addresses which could not be retrieved from the api or which could not be matched with the address junction table
+3. RUN scraper.py, setting the file to 'missing.csv'. Place the .json files in Processed-Data/attom-json/missing
+4. RUN property_data.ipynb from the "Read missing back in" subheading. 
+	a) Split the results into 'found', which were retrieved on the second run-through and 'missing_list', which still could not be retrieved.
+	b) In found, compare the coordinates retrieved from the api service to the coordinates of the address used to query. If it seems that the api found the wrong location, drop this address. Otherwise, add to a new dataframe dfp2.
+	c) In missing_list, split the non-found addresses by the error code. If the error was "System Not Responding", the address can be retrieved by querying the 'BasicProfile' rather than 'ExtendedProfile' endpoint. Export the addresses with this error code to a csv, then run scraper.py changing the file to this csv and the api endpoint to basicprofile. 
+	d) Move the results of step c) to /Processed-Data/attom_json/missing/noresponse/, then retrieve and add them to a new dataframe dfp3.
+	e) Concatenate dfp, dfp2, and dfp3 into a single dataframe, dfp_all, and export to property_data.csv

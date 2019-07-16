@@ -7,11 +7,13 @@ from fix_addresses_master import *
 #Specify paths below this line
 #########################################
 #PATH TO UTILITIES TABLE with addresses still included
-PATH_TO_UTILITIES = '~/Dropbox (Amherst College)/CDS-2019-AlbanyHub/Raw-Data/ReformattedYears/Total.csv'
+#PATH_TO_UTILITIES = '/home/mirabel/Dropbox (GaTech)/CDS-2019-AlbanyHub/ToDatabase/TotalUtilities.csv'
+PATH_TO_UTILITIES = '/Users/william/Dropbox (Amherst College)/CDS-2019-AlbanyHub/ToDatabase/TotalUtilities.csv'
 #PATH TO ADDRESS JUNCTION TABLE created in create_junction_table.py
 df_junction_table = pd.read_csv('~/Dropbox (Amherst College)/CDS-2019-AlbanyHub/ToDatabase/addr_junct_table.csv')
 #OUTPUT PATH
-OUT_PATH='~/Dropbox (Amherst College)/CDS-2019-AlbanyHub/Raw-Data/ReformattedYears/'
+#OUT_PATH='/Users/william/Dropbox (Amherst College)/CDS-2019-AlbanyHub/Raw-Data/test/TotalUtilities_v2.csv'
+OUT_PATH='/Users/william/Dropbox (Amherst College)/CDS-2019-AlbanyHub/Raw-Data/test/'
 #########################################
 #make sure column names are correct
 df_utilities = pd.read_csv(PATH_TO_UTILITIES)
@@ -36,6 +38,8 @@ for i in range(0, len(s_utilities)):
     counter += 1
 #output to file
 df_utilities['PrimaryID'] = pd.Series(primaryid_list1)
-df_utilities.to_csv(PATH_TO_UTILITIES, index_label="ChargeID")
+df_utilities['Premise Address'] = s_utilities
+#df_utilities.to_csv(PATH_TO_UTILITIES , index_label="ChargeID")
+df_utilities.to_csv(OUT_PATH + "utilities_v2.csv", index_label = "ChargeID")
 df2 = pd.DataFrame(data={'addr':list(notfound_dict.values()), 'loc':list(notfound_dict.keys())})
 df2.to_csv(OUT_PATH+"utilities_notfound.csv", index=False)
