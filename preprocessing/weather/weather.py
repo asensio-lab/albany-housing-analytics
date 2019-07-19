@@ -1,6 +1,7 @@
 #INPUT: raw files downloaded from NOAA 
 #OUTPUT: summary of month LCD_MONTH
 import pandas as pd
+import datetime as dt
 #SPECIFY input files below this line
 ###################################
 PATH = '~/Dropbox (GaTech)/CDS-2019-AlbanyHub/Raw-Data/Weather/'
@@ -81,6 +82,7 @@ for vals in missing_cols.itertuples():
     SOM.loc[vals.Index, 'MonthlyMeanTemperature'] = days.loc[:,'DailyAverageDryBulbTemperature'].apply(asciistrip).mean()
     SOM.loc[vals.Index, 'CLDD'] = days.loc[:,'DailyAverageDryBulbTemperature'].apply(asciistrip).agg(CDD_monthly).sum()
     SOM.loc[vals.Index, 'HTDD'] = days.loc[:,'DailyAverageDryBulbTemperature'].apply(asciistrip).agg(HDD_monthly).sum()
+    SOM.loc[vals.Index, 'DATE'] = dt.datetime.strptime(""+str(int(vals.YEAR))+"-"+str(int(vals.MONTH))+"-01", '%Y-%m-%d')
 SOM=SOM.sort_values(by=['YEAR', 'MONTH'])
 SOM.index = range(len(SOM))
 SOM = SOM[['YEAR', 'MONTH', 'DATE', 'MonthlyMaximumTemperature', 'MonthlyMinimumTemperature', 'MonthlyMeanTemperature', 'CLDD', 'HTDD']]
