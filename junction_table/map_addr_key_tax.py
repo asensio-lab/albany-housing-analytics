@@ -1,4 +1,5 @@
 import pandas as pd
+from fix_addresses_master import *
 #This file assigns the address key based on the junction table to each entry in the tax data set
 #outputs:   TotalTax.csv - same file with junction values added
 #           tax_notfound.csv = the addresses which were not found in the junction table 
@@ -21,7 +22,7 @@ primaryid_list1 = [None] * len(s_tax)
 notfound_dict = {}
 counter = 0
 print(type(s_tax))
-#s_tax = fix_series(s_tax)   #Fix typos using fix_addresses_master.py
+s_tax = fix_series(s_tax)   #Fix typos using fix_addresses_master.py #NOT SURE ABOUT THIS
 #For each address in utilities, pull address id from dictionary
 for i in range(0, len(s_tax)):
     if counter % 100000 == 0:
@@ -34,6 +35,7 @@ for i in range(0, len(s_tax)):
     counter += 1
 #output to file
 df_tax['PrimaryID'] = pd.Series(primaryid_list1)
+df_tax['FULL_ADDRESS'] = s_tax
 df_tax.to_csv(PATH_TO_TAX)
 df2 = pd.DataFrame(data={'addr':list(notfound_dict.values()), 'loc':list(notfound_dict.keys())})
 df2.to_csv(OUT_PATH+"tax_notfound.csv", index=False)
