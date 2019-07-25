@@ -3,12 +3,12 @@ Albany Housing Analytics
 # This code processes data and information for the Georgia Tech Albany Hub research project. This is the main repository for data analysis and scientific replication. 
 
 ## Weather
-Download the raw LCD data from NOAA
-Run preprocessing/weather/weather.py on this LCD Data
+Download the raw LCD data from NOAA following instructions in extended documentation. 
+Run preprocessing/weather/weather.py on this LCD Data.
 
 ## Utility
-Download the reformatted utility charges from Sharepoint
-Run utilities_step1 up to the header "Step 1 Stop Here"
+Download the reformatted utility charges from Sharepoint.
+Run utilities_step1 up to the header "Step 1 Stop Here".
 
 ## Housing Project
 
@@ -40,3 +40,6 @@ missing.csv: The addresses which could not be retrieved from the api or which co
 	d) Move the results of step c) to /Processed-Data/attom_json/missing/noresponse/, then retrieve and add them to a new dataframe dfp3.
 	e) Concatenate dfp, dfp2, and dfp3 into a single dataframe, dfp_all, and export to property_data.csv
 
+## Census Tract and Block Group
+Download block-group and tract data from American Fact Finder following instructions in extended documentation. 
+Run census_processing/process_census.ipynb up to the heading "Census Processing Stop Here
