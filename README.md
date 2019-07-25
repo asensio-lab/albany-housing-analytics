@@ -9,6 +9,7 @@ Run preprocessing/weather/weather.py on this LCD Data.
 ## Utility
 Download the reformatted utility charges from Sharepoint.
 Run utilities_step1 up to the header "Step 1 Stop Here".
+...
 
 ## Housing Project
 
@@ -34,12 +35,30 @@ property_data.csv: certain chosen fields from the property data exported into a 
 missing.csv: The addresses which could not be retrieved from the api or which could not be matched with the address junction table
 3. RUN scraper.py, setting the file to 'missing.csv'. Place the .json files in Processed-Data/attom-json/missing
 4. RUN property_data.ipynb from the "Read missing back in" subheading. 
+
 	a) Split the results into 'found', which were retrieved on the second run-through and 'missing_list', which still could not be retrieved.
+    
 	b) In found, compare the coordinates retrieved from the api service to the coordinates of the address used to query. If it seems that the api found the wrong location, drop this address. Otherwise, add to a new dataframe dfp2.
+    
 	c) In missing_list, split the non-found addresses by the error code. If the error was "System Not Responding", the address can be retrieved by querying the 'BasicProfile' rather than 'ExtendedProfile' endpoint. Export the addresses with this error code to a csv, then run scraper.py changing the file to this csv and the api endpoint to basicprofile. 
+    
 	d) Move the results of step c) to /Processed-Data/attom_json/missing/noresponse/, then retrieve and add them to a new dataframe dfp3.
+    
 	e) Concatenate dfp, dfp2, and dfp3 into a single dataframe, dfp_all, and export to property_data.csv
 
 ## Census Tract and Block Group
 Download block-group and tract data from American Fact Finder following instructions in extended documentation. 
 Run census_processing/process_census.ipynb up to the heading "Census Processing Stop Here
+
+## Analysis
+Investigate_Distribution.ipynb
+This file investigates the normality of consumption across several different types of houses. <br>
+It outlines a procedure to normalize consumption and control for different factors. <br>
+It plots gas and electricity consumption, normalized by square footage and not, across albany for a given month. It uses a kernel density plot and a quantile-quantile plot to visualize the distribution of these values. <br>
+It collects the mean electric and gas consumption for each month and plots these against the weather. 
+Finally it investigates the distribution of consumption for non-project versus project homes.
+
+Weatherization.ipynb
+This file shows the linear relationship between gas and htdd <br>
+Compares the shifted versus non-shifted dates and demonstrates that shifting the dates is more accurate
+
