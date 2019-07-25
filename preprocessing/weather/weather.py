@@ -71,6 +71,13 @@ def HDD_monthly(series):
         return 0
     else:
         return 65-series
+def daysinmonth(m,y):
+    days_per_month = [31,28,31,30,31,30,31,31,30,31,30,31]
+    days_per_month_ly =[31,29,31,30,31,30,31,31,30,31,30,31]
+    if y %4 == 0:
+        return days_per_month_ly[m-1]
+    else:
+        return days_per_month[m-1]
 missing_ct= SOM['MonthlyMaximumTemperature'].isnull().sum()
 #fill these in with SOD
 missing_cols = SOM.loc[SOM['MonthlyMaximumTemperature'].isnull(), :]
@@ -82,7 +89,8 @@ for vals in missing_cols.itertuples():
     SOM.loc[vals.Index, 'MonthlyMeanTemperature'] = days.loc[:,'DailyAverageDryBulbTemperature'].apply(asciistrip).mean()
     SOM.loc[vals.Index, 'CLDD'] = days.loc[:,'DailyAverageDryBulbTemperature'].apply(asciistrip).agg(CDD_monthly).sum()
     SOM.loc[vals.Index, 'HTDD'] = days.loc[:,'DailyAverageDryBulbTemperature'].apply(asciistrip).agg(HDD_monthly).sum()
-    SOM.loc[vals.Index, 'DATE'] = dt.datetime.strptime(""+str(int(vals.YEAR))+"-"+str(int(vals.MONTH))+"-01", '%Y-%m-%d')
+    st = ""+str(int(vals.YEAR))+"-"+str(int(vals.MONTH))+"-"+str(daysinmonth(vals.MONTH,vals.YEAR))
+    SOM.loc[vals.Index, 'DATE'] = dt.datetime.strptime(st, '%Y-%m-%d')
 SOM=SOM.sort_values(by=['YEAR', 'MONTH'])
 SOM.index = range(len(SOM))
 SOM = SOM[['YEAR', 'MONTH', 'DATE', 'MonthlyMaximumTemperature', 'MonthlyMinimumTemperature', 'MonthlyMeanTemperature', 'CLDD', 'HTDD']]
