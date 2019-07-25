@@ -1,3 +1,5 @@
+[BlockGroupID] [INT] NOT NULL,
+[BlockGroupTract] [VARCHAR](255) NOT NULL,
 [GEO.id] [VARCHAR](255) NULL,
 [Year] [INT] NULL,
 [GEO.id2] [INT] NULL,
