@@ -1,6 +1,10 @@
+DROP TABLE IF EXISTS dbo.Tract
+GO
+
+CREATE TABLE [dbo].[Tract](
 [TractID] [INT] NOT NULL,
 [GEO.id] [VARCHAR](255) NOT NULL,
-[GEO.id2] [INT] NOT NULL,
+[GEO.id2] [VARCHAR](255) NOT NULL,
 [Tract] [INT] NOT NULL,
 [County] [VARCHAR](255) NOT NULL,
 [Year] [INT] NOT NULL,
@@ -273,3 +277,19 @@
 [LFPRateEdu25To64Bachelors] [FLOAT] NULL,
 [EmpRatioEdu25To64Bachelors] [FLOAT] NULL,
 [UnempRateEdu25To64Bachelors] [FLOAT] NULL,
+
+    CONSTRAINT [PK_TractID] PRIMARY KEY CLUSTERED
+    (
+        [TractID] asc
+    )
+) ON [PRIMARY]
+GO
+
+BULK INSERT Tract
+FROM 'Tract_v03.csv'
+WITH (DATA_SOURCE = 'databasestore',
+    FIRSTROW=2,
+    FIELDTERMINATOR = ',',
+    ROWTERMINATOR = '0x0a',
+    FORMAT = 'CSV')
+GO
