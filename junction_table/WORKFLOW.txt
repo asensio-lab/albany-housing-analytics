@@ -12,6 +12,6 @@ csvs from geocoding in dropbox
 3. run map_addr_key_housing.py to match up the housing projects with the junction table. Addresses in the housing projects dataset are brought into line with the junction table using functions imported from fix_addresses_master.py. Addresses which still cannot be matched are coded as NOT FOUND
 
 
-3. run map_addr_key_tax.py to match up the tax with the junction table. Addresses in the tax dataset are brought into line with the junction table using functions imported from fix_addresses_master.py. Addresses which still cannot be matched are coded as NOT FOUND
+4. run map_addr_key_tax.py to match up the tax with the junction table. Addresses in the tax dataset are brought into line with the junction table using functions imported from fix_addresses_master.py. Addresses which still cannot be matched are coded as NOT FOUND
 
 
