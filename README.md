@@ -3,20 +3,24 @@ Albany Housing Analytics
 # This code processes data and information for the Georgia Tech Albany Hub research project. This is the main repository for data analysis and scientific replication. 
 
 ## Weather
-Download the raw LCD data from NOAA following instructions in extended documentation. 
+Download the raw LCD data from NOAA following instructions in extended documentation. <br>
 Run preprocessing/weather/weather.py on this LCD Data.
 
 ## Utility
-Download the reformatted utility charges from Sharepoint.
-Run utilities_step1 up to the header "Step 1 Stop Here".
-...
+Download the reformatted utility charges from Sharepoint.<br>
+Run utilities_step1 up to the header "Step 1 Stop Here".<br>
+...<br>
+After the junction table is created, run map_addr_key_utilities.py to associate the address to its primary key.<br>
 
 ## Housing Project
-
-
+Run housing_data_read.ipynb to convert the excel file into a combined csv with both CDBG and HOME funded projects.
+Run build_addr_dict.py to build a JSON dictionary which maps street names to their proper endings (eg 'DR' or 'ST') based on the 2012 utility data (under the assumption that all streets are represented in that data set).
+Run fix_housing_addresses.py to create HOME/CDBG_2007-2017_fixed_address.csv, which converts addresses to all caps and fixes their endings based on the JSON dictionary
+...<br>
+After the junction table is created, run map_addr_key_housing.py to associate the address to its primary key.<br>
 ## Address Junction Table
-Run junction_table/retrieve_unique_addresses.ipynb to get the address csvs to be geocoded
-Geocode each address CSV using MMQGIS and the Google Maps API (Instructions in full documentation)
+Run junction_table/retrieve_unique_addresses.ipynb to get the address csvs to be geocoded<br>
+Geocode each address CSV using MMQGIS and the Google Maps API (Instructions in full documentation)<br>
 
 1. run create_junction_table_csv.py to create the junction table from the geocoded csvs
    run addr_split_block.py to fix the issue where geocoding records data at block level, where we need block group
@@ -28,7 +32,7 @@ Geocode each address CSV using MMQGIS and the Google Maps API (Instructions in f
 4. run map_addr_key_tax.py to match up the tax with the junction table. Addresses in the tax dataset are brought into line with the junction table using functions imported from fix_addresses_master.py. Addresses which still cannot be matched are coded as NOT FOUND
 
 ## Real Estate
-To retrieve data from api service:
+To retrieve data from api service:<br>
 1. RUN scraper.py, replacing the api key, setting the file the addresses are being read from to 'addr_junct_table.csv', and setting the api endpoint to 'extendedprofile'. Place the resulting .json files in Processed-Data/attom-json
 2. RUN property_data.ipynb, up to to the "Data Exploration" sub heading, generating:
 property_data.csv: certain chosen fields from the property data exported into a dataframe
@@ -47,25 +51,25 @@ missing.csv: The addresses which could not be retrieved from the api or which co
 	e) Concatenate dfp, dfp2, and dfp3 into a single dataframe, dfp_all, and export to property_data.csv
 
 ## Census Tract and Block Group
-Download block-group and tract data from American Fact Finder following instructions in extended documentation. 
+Download block-group and tract data from American Fact Finder following instructions in extended documentation. <br>
 Run census_processing/process_census.ipynb up to the heading "Census Processing Stop Here
 
 ## Analysis
-Investigate_Distribution.ipynb
+Investigate_Distribution.ipynb<br>
 This file investigates the normality of consumption across several different types of houses. <br>
 It outlines a procedure to normalize consumption and control for different factors. <br>
 It plots gas and electricity consumption, normalized by square footage and not, across albany for a given month. It uses a kernel density plot and a quantile-quantile plot to visualize the distribution of these values. <br>
 It collects the mean electric and gas consumption for each month and plots these against the weather. 
 Finally it investigates the distribution of consumption for non-project versus project homes.
 
-Weatherization.ipynb
+Weatherization.ipynb<br>
 This file shows the linear relationship between gas and htdd <br>
 Compares the shifted versus non-shifted dates and demonstrates that shifting the dates is more accurate <br>
 Finds addresses which do not have a strong linear relationship between HTDD and gas consumption
 
-Random_Sample.ipynb
+Random_Sample.ipynb<br>
 Grabs a random sample of SAMPLE_SIZE addresses from a list of utility bills
 
-prepost_plot.ipynb
+prepost_plot.ipynb<br>
 Compares the consumption before and after a project was completed.<br>
 Includes plots that range from Jan-Dec as well as plots in terms of # months before and after project completion
