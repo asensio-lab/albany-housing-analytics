@@ -60,5 +60,5 @@ Finally it investigates the distribution of consumption for non-project versus p
 
 Weatherization.ipynb
 This file shows the linear relationship between gas and htdd <br>
-Compares the shifted versus non-shifted dates and demonstrates that shifting the dates is more accurate
-
+Compares the shifted versus non-shifted dates and demonstrates that shifting the dates is more accurate <br>
+Finds addresses which do not have a strong linear relationship between HTDD and gas consumption
