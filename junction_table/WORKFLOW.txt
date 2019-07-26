@@ -1,3 +1,4 @@
+TO CREATE JUNCTION TABLE and match primary id to addresses in housing and utilities data set:
 prereqs: 
 TotalUtilities.csv
 TotalHouse.csv
@@ -9,4 +10,8 @@ csvs from geocoding in dropbox
 2. run map_addr_key_utilities.py to match up the utilities with the junction table. Addresses in the utilities dataset are brought into line with the junction table using functions imported from fix_addresses_master.py. Addresses which still cannot be matched are coded as NOT FOUND
 
 3. run map_addr_key_housing.py to match up the housing projects with the junction table. Addresses in the housing projects dataset are brought into line with the junction table using functions imported from fix_addresses_master.py. Addresses which still cannot be matched are coded as NOT FOUND
+
+
+3. run map_addr_key_tax.py to match up the tax with the junction table. Addresses in the tax dataset are brought into line with the junction table using functions imported from fix_addresses_master.py. Addresses which still cannot be matched are coded as NOT FOUND
+
 
