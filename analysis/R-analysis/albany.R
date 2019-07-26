@@ -1,7 +1,7 @@
 library(tidyverse)
 
 house <- read_csv("/Users/davidreynolds/Dropbox (GaTech)/CDS-2019-AlbanyHub/ToDatabase/TotalHouse_v06.csv")
-utilities <- read_csv("/Users/davidreynolds/Dropbox (GaTech)/CDS-2019-AlbanyHub/subsets of utilities/repairs_utilities.csv")
+utilities <- read_csv("/Users/davidreynolds/Dropbox (GaTech)/CDS-2019-AlbanyHub/ToDatabase/TotalUtilities_v04.csv")
 tract <- read_csv("/Users/davidreynolds/Dropbox (GaTech)/CDS-2019-AlbanyHub/ToDatabase/full_tract.csv")
 block_group <- read_csv("/Users/davidreynolds/Dropbox (GaTech)/CDS-2019-AlbanyHub/ToDatabase/full_blockgroup.csv")
 tax <- read_csv("/Users/davidreynolds/Dropbox (GaTech)/CDS-2019-AlbanyHub/ToDatabase/TotalTax_v03.csv")
@@ -362,23 +362,4 @@ utilities_project_home <- utilities[which(utilities$premise_address == house_hom
 utilities_project_cdbg <- utilities[which(utilities$premise_address == house_cdbg$address), ]
 t.test(utilities_project_home$consumption, utilities_project_cdbg$consumption)
 t.test(utilities_project_home$charge_amount, utilities_project_cdbg$charge_amount)
-
-#Discontinuity Analysis
-install.packages("rddtools")
-library(rddtools)
-utilities_emergency_2015_relc$charge_date <- as.numeric(utilities_emergency_2015_relc$charge_date)
-house_rdd_data <- rdd_data(y = utilities_emergency_2015_relc$consumption,
-                           x = utilities_emergency_2015_relc$charge_date,
-                           cutpoint = 17359)
-bandwidthsize <- rdd_bw_ik(house_rdd_data)
-fit <- rdd_reg_np(house_rdd_data, bandwidthsize)
-summary(fit)
-
-#Block Groups
-junction$Tract <- as.character(junction$Tract)
-junction$BlockGroup <- as.character(junction$BlockGroup)
-junction$tract_block_group <- paste(junction$Tract, junction$BlockGroup, sep = "_")
-junction_900_1 <- junction[which(junction$tract_block_group == "900_1"), ]
-utilities_900_1 <- utilities[which(utilities$PremiseAddress == junction_900_1$Address), ]
-
 
