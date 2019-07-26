@@ -5,6 +5,9 @@ Albany Housing Analytics
 
 ## Note for replication
 In the early stages of this project, some raw data was missing (In particular, we did not have data from the month of May for 2012, 2013, 2014, and 2015). We received this data after the addresses had been geocoded and the junction table was made. To replicate the database files exactly, leave these months out when running retrieve_unique_addresses.ipynb. 
+## Adding data
+If new utility data is added, new addresses which did not exist previously may appear. <br>
+To find and add these, run junction_table/add_addresses.ipynb to find any new addresses. Geocode these addresses in MMQGIS and follow the instructions in the documentation to merge them with the block group shapefiles. Then add them to the junction table and rerun steps 2-4 under the header "Address Junction Table".
 ## Weather
 Download the raw LCD data from NOAA following instructions in extended documentation. <br>
 Run preprocessing/weather/weather.py on this LCD Data.
