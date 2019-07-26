@@ -5,13 +5,13 @@ import json
 import string
 import re
 #fixes various issues with housing addresses
-#PATH_TO_CDBG = "~/Dropbox/CDS-2019-AlbanyHub/Processed-Data/CDBG_Funded_Projects.csv"
-#PATH_TO_HOME= "~/Dropbox/CDS-2019-AlbanyHub/Processed-Data/HOME_Funded_Projects.csv"
-PATH_TO_CDBG = "~/Dropbox (Amherst College)/CDS-2019-AlbanyHub/Processed-Data/CDBG_Funded_Projects.csv"
-PATH_TO_HOME = "~/Dropbox (Amherst College)/CDS-2019-AlbanyHub/Processed-Data/HOME_Funded_Projects.csv"
+PATH_TO_CDBG = "~/Dropbox/CDS-2019-AlbanyHub/Test-Replication/CDBG_Funded_Projects.csv"
+PATH_TO_HOME= "~/Dropbox/CDS-2019-AlbanyHub/Test-Replication/HOME_Funded_Projects.csv"
+# PATH_TO_CDBG = "~/Dropbox (Amherst College)/CDS-2019-AlbanyHub/Processed-Data/CDBG_Funded_Projects.csv"
+# PATH_TO_HOME = "~/Dropbox (Amherst College)/CDS-2019-AlbanyHub/Processed-Data/HOME_Funded_Projects.csv"
 #create this file by running build_addr_dict.py
 #addr_dict maps the street name to the postfix (i.e. st, dr, etc)
-f = open('addr_dict.json', 'r')
+f = open('/home/mirabel/Dropbox (GaTech)/CDS-2019-AlbanyHub/Test-Replication/addr_dict.json', 'r')
 addr_dict=json.load(f)
 
 #maps full names to proper abbreviations
@@ -94,7 +94,7 @@ fixed.iloc[108] = "1206 S MCKINLEY ST"
 fixed.iloc[167] = '1401 E CAMPBELL ST/108 CARROLL ST'
 fixed.iloc[185] = '2206 HABERSHAM RD APTS 31-40'
 cdbg['Address'] = fixed
-cdbg.to_csv("CDBG_2007-2017_fixed_address.csv")
+cdbg.to_csv("CDBG_2007-2017_fixed_address.csv", index=False)
 
 #read home data and standardize column names
 home = pd.read_csv(PATH_TO_HOME).rename(columns = {'Parcel':'Parcel ID', 'X Y Coordinates':'XY Coordinates', 'Projects':'Project'})
@@ -110,4 +110,4 @@ fixed.iloc[189] = '803 CARDINAL GROVE CT 1'
 fixed.iloc[240] = '509 N WESTOVER BLVD 336'
 fixed.iloc[255] = '2710 W OAKRDIGE DR 28'
 home['Address'] = fixed
-home.to_csv("HOME_2007-2017_fixed_address.csv")
+home.to_csv("HOME_2007-2017_fixed_address.csv", index=False)

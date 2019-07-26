@@ -2,6 +2,14 @@
 Albany Housing Analytics 
 # This code processes data and information for the Georgia Tech Albany Hub research project. This is the main repository for data analysis and scientific replication. 
 
+## The real estate data is not meant for public reposting as it is for proprietary use only.
+
+## Note for replication
+In the early stages of this project, some raw data was missing (In particular, we did not have data from the month of May for 2012, 2013, 2014, and 2015). We received this data after the addresses had been geocoded and the junction table was made. To replicate the database files exactly, leave these months out when running retrieve_unique_addresses.ipynb. 
+## Adding data
+If new utility data is added, new addresses which did not exist previously may appear. <br>
+To find and add these, run junction_table/add_addresses.ipynb to find any new addresses. Geocode these addresses in MMQGIS and follow the instructions in the extended documentation to merge them with the block group shapefiles. Then add them to the junction table and rerun steps 2-4 under the header "Address Junction Table". <br>
+
 ## Weather
 Download the raw LCD data from NOAA following instructions in extended documentation. <br>
 Run preprocessing/weather/weather.py on this LCD Data.
@@ -15,9 +23,13 @@ After the junction table is created, run map_addr_key_utilities.py to associate 
 ## Housing Project
 Run housing_data_read.ipynb to convert the excel file into a combined csv with both CDBG and HOME funded projects.
 Run build_addr_dict.py to build a JSON dictionary which maps street names to their proper endings (eg 'DR' or 'ST') based on the 2012 utility data (under the assumption that all streets are represented in that data set).
-Run fix_housing_addresses.py to create HOME/CDBG_2007-2017_fixed_address.csv, which converts addresses to all caps and fixes their endings based on the JSON dictionary
+Run fix_housing_addresses.py to create HOME/CDBG_2007-2017_fixed_address.csv, which converts addresses to all caps and fixes their endings based on the JSON dictionary.
+
+Generate mismatched_housing_addresses.csv (?)
 ...<br>
-After the junction table is created, run map_addr_key_housing.py to associate the address to its primary key.<br>
+After the junction table is created, run map_addr_key_housing.py to associate the address to its primary key. Set the input file as fix_housing_addresses.py<br>
+
+To pull in the drawdown reports, run pr03-xlsx2csv.py to convert the pr03 reports to csv files. Then, run pr03_reformat.py to pull selected columns out of the strangely formatted csvs. 
 ## Address Junction Table
 Run junction_table/retrieve_unique_addresses.ipynb to get the address csvs to be geocoded<br>
 Geocode each address CSV using MMQGIS and the Google Maps API (Instructions in full documentation)<br>
@@ -73,3 +85,12 @@ Grabs a random sample of SAMPLE_SIZE addresses from a list of utility bills
 prepost_plot.ipynb<br>
 Compares the consumption before and after a project was completed.<br>
 Includes plots that range from Jan-Dec as well as plots in terms of # months before and after project completion
+
+albany.R<br>
+Runs basic statistical tests on the data to see if there is a difference in consumption and charge amount between different types of homes. Also contains basic regression models predicting charge amount and consumption.
+
+utilities_ttest_regression.R<br>
+Runs t-tests to compare the difference in consumption before and after projects were completed for project homes to the difference in consumption during that same time period for nonproject homes.
+
+realprojind_ttest.R<br>
+Runs t-tests to see if various features in realprojind.csv differ between project and nonproject homes.

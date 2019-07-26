@@ -4,7 +4,7 @@ import json
 #builds a dict mapping street addresses to their suffix (st, dr, etc)
 #and exports to json
 #PATH_TO_CSV = "~/Dropbox/CDS-2019-AlbanyHub/Processed-Data/Totals2012.csv"
-PATH_TO_CSV = "~/Dropbox (Amherst College)/CDS-2019-AlbanyHub/Processed-Data/Totals2012.csv"
+PATH_TO_CSV = "~/Dropbox (GaTech)/CDS-2019-AlbanyHub/Test-Replication/Totals2012.csv"
 df = pd.read_csv(PATH_TO_CSV, sep=',')
 
 addresses = df.loc[:,'Premise Address'].copy()

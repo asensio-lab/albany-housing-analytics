@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 import re
 import os
 from fix_addresses_master import *
-#directory = "/home/mirabel/Dropbox/CDS-2019-AlbanyHub/Raw-Data/PR 03 - CDBG_CDBG-R Activity Summary Report/"
+#directory = "/home/mirabel/Dropbox (GaTech)/CDS-2019-AlbanyHub/Raw-Data/Housing/Pr03_2007/"
 directory = "/Users/william/Dropbox (Amherst College)/CDS-2019-AlbanyHub/Raw-Data/pr03_2007/"
 project_typo_fixer = {'ACQUISITIONS':'ACQUISITION', 
             'GENERAL ADMINISTRATION':'ADMINISTRATION',
