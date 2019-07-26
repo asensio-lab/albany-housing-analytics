@@ -1,0 +1,6 @@
+ALTER TABLE dbo.Address
+   ADD CONSTRAINT FK_Address_Tax FOREIGN KEY (TaxID)
+      REFERENCES dbo.Tax (TaxID)
+      ON DELETE CASCADE
+      ON UPDATE CASCADE
+;
