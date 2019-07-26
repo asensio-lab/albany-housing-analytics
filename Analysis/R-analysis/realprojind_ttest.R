@@ -4,7 +4,6 @@ proj <- read_csv("/Users/davidreynolds/Dropbox (GaTech)/CDS-2019-AlbanyHub/analy
 attach(proj)
 ProjInd <- as.factor(ProjInd)
 
-
 t.test(LotSize ~ ProjInd)
 t.test(Size ~ ProjInd)
 t.test(Baths ~ ProjInd)
