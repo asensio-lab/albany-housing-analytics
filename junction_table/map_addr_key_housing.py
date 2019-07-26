@@ -19,6 +19,7 @@ output_path = path + 'Raw-Data/test/'
 #########################################
 df_junction_table.columns = ['PrimaryID', 'Address', 'Xcoord', 'Ycoord', 'Tract', 'BlockGroup', 'Block']
 my_dict = df_junction_table.set_index('Address').to_dict()['PrimaryID']#maps each address to its id
+print("Shape of Housing Dataframe:", df_housing_projects.shape)
 s_housing_projects = df_housing_projects['Address']#lists all addresses in housing projects
 
 #Drop unneccesary columns
@@ -29,6 +30,7 @@ primaryid_list1 = [None] * len(s_housing_projects) #the id for each address
 notfound_dict = {}
 counter = 0
 s_housing_projects = fix_series(s_housing_projects)   #Fix typos using fix_addresses_master.py
+print("Matching...")
 #loop over each address in the dataset and retrieve its id
 for i in range(0, len(s_housing_projects)):
     try: 
@@ -38,7 +40,9 @@ for i in range(0, len(s_housing_projects)):
         notfound_dict[i] = s_housing_projects[i]
     counter += 1
 #output to file
+print("Shape of Housing Dataframe:", df_housing_projects.shape)
 df_housing_projects['PrimaryID'] = pd.Series(primaryid_list1) #set the primary id field
 df_housing_projects.to_csv(output_path+"TotalHouse_v03.csv")
 df2 = pd.DataFrame(data={'addr':list(notfound_dict.values()), 'loc':list(notfound_dict.keys())})#format the list of not found addresses as a pandas dataframe
+print("Records not matched:", df2.shape)
 df2.to_csv(output_path+"house_notfound.csv")

@@ -2,6 +2,9 @@
 Albany Housing Analytics 
 # This code processes data and information for the Georgia Tech Albany Hub research project. This is the main repository for data analysis and scientific replication. 
 
+
+## Note for replication
+In the early stages of this project, some raw data was missing (In particular, we did not have data from the month of May for 2012, 2013, 2014, and 2015). We received this data after the addresses had been geocoded and the junction table was made. To replicate the database files exactly, leave these months out when running retrieve_unique_addresses.ipynb. 
 ## Weather
 Download the raw LCD data from NOAA following instructions in extended documentation. <br>
 Run preprocessing/weather/weather.py on this LCD Data.
@@ -15,9 +18,11 @@ After the junction table is created, run map_addr_key_utilities.py to associate 
 ## Housing Project
 Run housing_data_read.ipynb to convert the excel file into a combined csv with both CDBG and HOME funded projects.
 Run build_addr_dict.py to build a JSON dictionary which maps street names to their proper endings (eg 'DR' or 'ST') based on the 2012 utility data (under the assumption that all streets are represented in that data set).
-Run fix_housing_addresses.py to create HOME/CDBG_2007-2017_fixed_address.csv, which converts addresses to all caps and fixes their endings based on the JSON dictionary
+Run fix_housing_addresses.py to create HOME/CDBG_2007-2017_fixed_address.csv, which converts addresses to all caps and fixes their endings based on the JSON dictionary.
+
+Generate mismatched_housing_addresses.csv (?)
 ...<br>
-After the junction table is created, run map_addr_key_housing.py to associate the address to its primary key.<br>
+After the junction table is created, run map_addr_key_housing.py to associate the address to its primary key. Set the input file as fix_housing_addresses.py<br>
 ## Address Junction Table
 Run junction_table/retrieve_unique_addresses.ipynb to get the address csvs to be geocoded<br>
 Geocode each address CSV using MMQGIS and the Google Maps API (Instructions in full documentation)<br>
