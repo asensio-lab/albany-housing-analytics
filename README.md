@@ -2,6 +2,7 @@
 Albany Housing Analytics 
 # This code processes data and information for the Georgia Tech Albany Hub research project. This is the main repository for data analysis and scientific replication. 
 
+## The real estate data is not meant for public reposting as it is for proprietary use only.
 
 ## Note for replication
 In the early stages of this project, some raw data was missing (In particular, we did not have data from the month of May for 2012, 2013, 2014, and 2015). We received this data after the addresses had been geocoded and the junction table was made. To replicate the database files exactly, leave these months out when running retrieve_unique_addresses.ipynb. 
