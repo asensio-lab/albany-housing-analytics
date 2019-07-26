@@ -1,0 +1,138 @@
+---
+title: "weather_regression"
+output: html_document
+---
+
+
+```{r, echo = FALSE, warning=FALSE, message=FALSE, results='hide'}
+# load in necessary libraries
+library(readr)
+library(dplyr)
+library(ggplot2)
+library(ggthemes)
+library(forcats)
+library(xtable)
+library(stringr)
+library(zoo)
+library(data.table)
+library(lubridate)
+library(plm)
+```
+
+```{r, echo=FALSE}
+# this dataset contains all projects where weatherization of a home may have taken place -- it was filtered for the "Emergency Repairs," "Energy Efficiency," and "Homeowner Rehabilitation" project types
+df = read_csv("affected_homes.csv")
+
+# this file contains monthly weather data
+df_w = read_csv("weather.csv")
+
+# create two dataframes, one for gas consumption and one for electricity consumption
+df_gas <- df %>% filter(ServiceType == 'RGAS')
+df_elc <- df %>% filter(ServiceType == 'RELC')
+```
+```{r, echo=FALSE}
+# group by variables to keep, summarize consumption and consumption per SQFT so that there is only one record for a property per month
+df1_gas <- df_gas %>% group_by(Year, Month, AddressID, address) %>% summarise(TotalConsumption =sum(Consumption), TotalConsPerSQFT = sum(ConsumptionPerSQFT))
+```
+```{r, echo=FALSE}
+# change the month of the ChargeDate to accurately represent the month that the utility consumption comes from
+for (proj in 1:nrow(df1_gas)) {
+  #month(df1$ChargeDate[proj]) = month(df1$ChargeDate[proj]) - 1
+  if (df1_gas$Month[proj] == 1) {
+    df1_gas$Month[proj] = 12
+    df1_gas$Year[proj] = df1_gas$Year[proj] - 1 
+  } else {
+    df1_gas$Month[proj] = df1_gas$Month[proj] - 1 
+  }
+}
+
+for (proj in 1:nrow(df_gas)) {
+  #month(df1$ChargeDate[proj]) = month(df1$ChargeDate[proj]) - 1
+  if (df_gas$Month[proj] == 1) {
+    df_gas$Month[proj] = 12
+    df_gas$Year[proj] = df_gas$Year[proj] - 1 
+  } else {
+    df_gas$Month[proj] = df_gas$Month[proj] - 1 
+  }
+}
+```
+
+```{r, echo=FALSE}
+# normalize consumption per sq. ft. by the days of the month the bill comes from
+nod <- c(31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31)
+nod_ly <- c(31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31)
+
+for (proj in 1:nrow(df1_gas)) {
+  m = df1_gas$Month[proj]
+  if (df1_gas$Year[proj] %% 4 == 0) {
+    d = nod_ly[m]
+    df1_gas$NormalConsSQFT = df1_gas$TotalConsPerSQFT / d
+  } else {
+    d = nod[m]
+    df1_gas$NormalConsSQFT = df1_gas$TotalConsPerSQFT / d
+  }
+}
+```
+
+```{r, echo=FALSE}
+# Check for any addresses where there is zero consumption for the whole year
+
+# UNFINISHED WORK
+
+y <- df1_gas %>% group_by(AddressID, Year) %>% summarise(TotalNormal = sum(NormalConsSQFT))
+y <- na.omit(y)
+for (proj in 1:nrow(y)) {
+  if (y$TotalNormal[proj] == 0) {
+    
+    for (i in 1:nrow(df1_gas)) {
+        df1_gas <- subset(df1_gas, !(df1_gas$AddressID[i] == y$AddressID[proj] & df1_gas$Year[i] == y$Year[proj]))
+    }
+  }
+}
+```
+
+
+```{r, echo=FALSE}
+# create a graphable date
+df_gas$date <- as.Date(df_gas$StatusDate, "%m/%d/%Y")
+
+# separate the month from the date to create the dummy variable
+df_gas$proj_month <- month(df_gas$date)
+
+# create blank column for dummy variable for each project in the dataframe
+df_gas$dummy <- NA
+
+# create a dummy variable based on whether or not a project was completed -- if the variable is 0, the consumption data is from a month prior to the month the project was completed
+for (proj in 1:nrow(df_gas)) {
+  if (df_gas$Year[proj] < df_gas$PlanYear[proj]) {
+    df_gas$dummy[proj] = 0
+  } else if ((df_gas$proj_month[proj] > df_gas$Month[proj]) & (df_gas$PlanYear[proj]==df_gas$Year[proj])) {
+    df_gas$dummy[proj] = 0
+  } else {
+    df_gas$dummy[proj] = 1
+  }
+}
+
+# test that the dummy variable works properly
+test <- df_gas %>% filter(address == '1817 GREENVALE AVE') %>% arrange(Year)
+```
+
+```{r, echo=FALSE}
+# create blank column for the average consumption of a household before the project was completed
+df_gas$avg_before <- NA
+
+# create blank column for the average consumption of a household after the project was completed
+df_gas$avg_after <- NA
+
+# find mean consumption for each project before and after the project was completed
+
+# UNFINISHED WORK
+
+for (proj in 1:nrow(df_gas)) {
+  while (df$dummy == 0) {
+    df_gas$avg_before = mean(df_gas$ConsumptionPerSQFT)
+  } else {
+    df_gas$avg_after = mean(df_gas$ConsumptionPerSQFT)
+  }
+}
+```
