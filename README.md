@@ -78,3 +78,12 @@ Grabs a random sample of SAMPLE_SIZE addresses from a list of utility bills
 prepost_plot.ipynb<br>
 Compares the consumption before and after a project was completed.<br>
 Includes plots that range from Jan-Dec as well as plots in terms of # months before and after project completion
+
+albany.R<br>
+Runs basic statistical tests on the data to see if there is a difference in consumption and charge amount between different types of homes. Also contains basic regression models predicting charge amount and consumption.
+
+utilities_ttest_regression.R<br>
+Runs t-tests to compare the difference in consumption before and after projects were completed for project homes to the difference in consumption during that same time period for nonproject homes.
+
+realprojind_ttest.R<br>
+Runs t-tests to see if various features in realprojind.csv differ between project and nonproject homes.
