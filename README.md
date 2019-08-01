@@ -2,9 +2,16 @@
 Albany Housing Analytics 
 # This code processes data and information for the Georgia Tech Albany Hub research project. This is the main repository for data analysis and scientific replication. 
 
+## The real estate data is not meant for public reposting as it is for proprietary use only.
 
 ## Note for replication
-In the early stages of this project, some raw data was missing (In particular, we did not have data from the month of May for 2012, 2013, 2014, and 2015). We received this data after the addresses had been geocoded and the junction table was made. To replicate the database files exactly, leave these months out when running retrieve_unique_addresses.ipynb. 
+In the early stages of this project, some raw data was missing (In particular, we did not have data from the month of May for 2012, 2013, 2014, and 2015). We received this data after the addresses had been geocoded and the junction table was made. To replicate the database files exactly, leave these months out when running retrieve_unique_addresses.ipynb. <br>
+
+The steps under each header can be run in any order unless otherwise specified. 
+## Adding data
+If new utility data is added, new addresses which did not exist previously may appear. <br>
+To find and add these, run junction_table/add_addresses.ipynb to find any new addresses. Geocode these addresses with MMQGIS and follow the instructions in the extended documentation to merge them with the block group shapefiles. Then add them to the junction table and rerun steps 2-4 under the header "Address Junction Table". <br>
+
 ## Weather
 Download the raw LCD data from NOAA following instructions in extended documentation. <br>
 Run preprocessing/weather/weather.py on this LCD Data.
@@ -23,7 +30,10 @@ Run fix_housing_addresses.py to create HOME/CDBG_2007-2017_fixed_address.csv, wh
 Generate mismatched_housing_addresses.csv (?)
 ...<br>
 After the junction table is created, run map_addr_key_housing.py to associate the address to its primary key. Set the input file as fix_housing_addresses.py<br>
+
+To pull in the drawdown reports, run pr03-xlsx2csv.py to convert the pr03 reports to csv files. Then, run pr03_reformat.py to pull selected columns out of the strangely formatted csvs. Convert the pr22 report from excel to csv (simpler since the pr22 report is in table format). Finally, run all cells in housing_merge_drawdown.ipynb to merge both the drawdown reports with the housing table by matching across IDIS ids.
 ## Address Junction Table
+Before running this section, follow the instruction under utilities up to '...'.
 Run junction_table/retrieve_unique_addresses.ipynb to get the address csvs to be geocoded<br>
 Geocode each address CSV using MMQGIS and the Google Maps API (Instructions in full documentation)<br>
 
@@ -37,6 +47,7 @@ Geocode each address CSV using MMQGIS and the Google Maps API (Instructions in f
 4. run map_addr_key_tax.py to match up the tax with the junction table. Addresses in the tax dataset are brought into line with the junction table using functions imported from fix_addresses_master.py. Addresses which still cannot be matched are coded as NOT FOUND
 
 ## Real Estate
+Run this after creating the junction table. 
 To retrieve data from api service:<br>
 1. RUN scraper.py, replacing the api key, setting the file the addresses are being read from to 'addr_junct_table.csv', and setting the api endpoint to 'extendedprofile'. Place the resulting .json files in Processed-Data/attom-json
 2. RUN property_data.ipynb, up to to the "Data Exploration" sub heading, generating:
@@ -78,3 +89,12 @@ Grabs a random sample of SAMPLE_SIZE addresses from a list of utility bills
 prepost_plot.ipynb<br>
 Compares the consumption before and after a project was completed.<br>
 Includes plots that range from Jan-Dec as well as plots in terms of # months before and after project completion
+
+albany.R<br>
+Runs basic statistical tests on the data to see if there is a difference in consumption and charge amount between different types of homes. Also contains basic regression models predicting charge amount and consumption.
+
+utilities_ttest_regression.R<br>
+Runs t-tests to compare the difference in consumption before and after projects were completed for project homes to the difference in consumption during that same time period for nonproject homes.
+
+realprojind_ttest.R<br>
+Runs t-tests to see if various features in realprojind.csv differ between project and nonproject homes.

@@ -1,7 +1,10 @@
 library(tidyverse)
 
+#Read in data files
 proj <- read_csv("/Users/davidreynolds/Dropbox (GaTech)/CDS-2019-AlbanyHub/subsets of utilities/repairs_utlities_sqft_2014.csv")
 nonproj <- read_csv("/Users/davidreynolds/Dropbox (GaTech)/CDS-2019-AlbanyHub/subsets of utilities/utilities_nonproj_subsample")
+
+#Omit any observations with missing data and classify ConsumptionPerSQFT as numeric
 proj <- na.omit(proj)
 nonproj <- na.omit(nonproj)
 proj$ConsumptionPerSQFT <- as.numeric(proj$ConsumptionPerSQFT)
