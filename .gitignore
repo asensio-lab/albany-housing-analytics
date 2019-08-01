@@ -1,10 +1,8 @@
 .ipynb_checkpoints
 .DS_Store
 __pycache__
-<<<<<<< HEAD
 preprocessing/propertyvalues/.ipynb_checkpoints/preprocessing/.ipynb_checkpoints/edited-census_data-checkpoint.ipynb
 preprocessing/.ipynb_checkpoints/
-=======
 preprocessing/propertyvalues/.ipynb_checkpoints/
 .Rhistory
->>>>>>> 0d2b9ee34fc0ec3a2c4bc8086c6e74e9b29070da
+preprocessing/database/FinalBlobyCreds.sql
