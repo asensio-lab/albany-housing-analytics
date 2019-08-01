@@ -6,3 +6,4 @@ preprocessing/.ipynb_checkpoints/
 preprocessing/propertyvalues/.ipynb_checkpoints/
 .Rhistory
 preprocessing/database/FinalBlobyCreds.sql
+sql/connect_utilities.py
