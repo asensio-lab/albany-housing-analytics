@@ -7,19 +7,22 @@ from fix_addresses_master import *
 #Specify paths below this line
 #########################################
 #PATH TO UTILITIES TABLE with addresses still included
-PATH_TO_UTILITIES = '/home/mirabel/Dropbox (GaTech)/CDS-2019-AlbanyHub/Test-Replication/Total.csv'
-#PATH_TO_UTILITIES = '/Users/william/Dropbox (Amherst College)/CDS-2019-AlbanyHub/ToDatabase/TotalUtilities_v03.csv'
+#PATH_TO_UTILITIES = '/home/mirabel/Dropbox (GaTech)/CDS-2019-AlbanyHub/Test-Replication/Total.csv'
+PATH_TO_UTILITIES = '/Users/william/Dropbox (Amherst College)/CDS-2019-AlbanyHub/Test-Replication/Total.csv'
 #PATH TO ADDRESS JUNCTION TABLE created in create_junction_table.py
-df_junction_table = pd.read_csv('~/Dropbox (GaTech)/CDS-2019-AlbanyHub/ToDatabase/addr_junct_table.csv')
+#df_junction_table = pd.read_csv('~/Dropbox (GaTech)/CDS-2019-AlbanyHub/ToDatabase/addr_junct_table.csv')
+df_junction_table = pd.read_csv('/Users/william/Dropbox (Amherst College)/CDS-2019-AlbanyHub/ToDatabase/TestDB/Ship/Address_v02.csv')
 #OUTPUT PATH
-#OUT_PATH='/Users/william/Dropbox (Amherst College)/CDS-2019-AlbanyHub/Raw-Data/test/TotalUtilities_v2.csv'
-OUT_PATH='/home/mirabel/Dropbox (GaTech)/CDS-2019-AlbanyHub/Test-Replication/'
+OUT_PATH='/Users/william/Dropbox (Amherst College)/CDS-2019-AlbanyHub/Test-Replication/'
+#OUT_PATH='/home/mirabel/Dropbox (GaTech)/CDS-2019-AlbanyHub/Test-Replication/'
 #########################################
 #make sure column names are correct
 df_utilities = pd.read_csv(PATH_TO_UTILITIES)
 print("Shape of Utilities Dataframe:", df_utilities.shape)
-df_junction_table.columns = ['PrimaryID', 'Address', 'Xcoord', 'Ycoord', 'Tract', 'BlockGroup', 'Block']
-my_dict = df_junction_table.set_index('Address').to_dict()['PrimaryID']#maps address to key
+#df_junction_table.columns = ['PrimaryID', 'Address', 'Xcoord', 'Ycoord', 'Tract', 'BlockGroup', 'Block']
+df_junction_table.columns = ['AddressID','Address','XCoord','YCoord','Tract','BlockGroup',
+'Block','TaxID','BlockGroupTract','BlockGroupID','TractID','RealEstateID']
+my_dict = df_junction_table.set_index('Address').to_dict()['AddressID']#maps address to key
 s_utilities = df_utilities['Premise Address']#list of addresses per charge
 primaryid_list1 = [None] * len(s_utilities)
 notfound_dict = {}
