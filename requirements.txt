@@ -24,7 +24,7 @@ Markdown==3.1.1
 matplotlib==3.1.0
 mock==3.0.5
 mysql-connector==2.2.9
-numpy==1.16.4
+numpy==1.22.0
 pandas==0.24.2
 parso==0.4.0
 pexpect==4.7.0
